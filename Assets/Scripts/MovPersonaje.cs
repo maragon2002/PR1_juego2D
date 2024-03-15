@@ -14,11 +14,15 @@ public class MovPersonaje : MonoBehaviour
 
     SpriteRenderer sr;
 
+    Animator animatorController;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-       sr= this.GetComponent<SpriteRenderer>();
+        sr= this.GetComponent<SpriteRenderer>();
+        animatorController=this.GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -31,15 +35,25 @@ public class MovPersonaje : MonoBehaviour
         float mov = Input.GetAxis("Horizontal") * multiplicadorVelocidad * Time.deltaTime;
         // transform.position=new Vector3(transform.position.x+mov,transform.position.y,transform.position.z);
         transform.Translate(mov, 0, 0);
+       
+       //flip personaje izquierda
         if(Input.GetKeyDown(KeyCode.A)){
             sr.flipX=true;
+            animatorController.SetBool("activacamina",true);
         
         }
+        //flip personaje derecha
         if(Input.GetKeyDown(KeyCode.D)){
             sr.flipX=false;
+            animatorController.SetBool("activacamina",true);
         
         }
-        
+        if(Input.GetKeyUp(KeyCode.A)||Input.GetKeyUp(KeyCode.D)){
+            animatorController.SetBool("activacamina",false);
+
+        }
+
+
         //SALTO
 
         RaycastHit2D hit;
