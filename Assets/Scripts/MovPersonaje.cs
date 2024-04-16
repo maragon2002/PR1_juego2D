@@ -15,6 +15,7 @@ public class MovPersonaje : MonoBehaviour
     SpriteRenderer sr;
 
     Animator animatorController;
+    public GameObject respawn;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +24,15 @@ public class MovPersonaje : MonoBehaviour
         sr= this.GetComponent<SpriteRenderer>();
         animatorController=this.GetComponent<Animator>();
 
+       // respawn= GameObject.Find("Respawn");
+        transform.position=respawn.transform.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+    if (GameManager.estoyMuerto)return;
 
         //MOVIMIENTO
 
@@ -59,7 +63,7 @@ public class MovPersonaje : MonoBehaviour
         RaycastHit2D hit;
         hit= Physics2D.Raycast(transform.position,Vector2.down,0.5f);
      
-        Debug.Log(hit.collider.name);
+        //Debug.Log(hit.collider.name);
 
         if(hit){
            Debug.Log(hit.collider.name);
@@ -79,14 +83,36 @@ public class MovPersonaje : MonoBehaviour
      if(Input.GetKeyDown(KeyCode.Space)&&puedoSaltar==true ){
         rb.AddForce(new Vector2(0,multiplicadorSalto),ForceMode2D.Impulse);
      }
+
+     if(transform.position.y <= -7){
+        Respawnear();
+
+    }
     }
 
 
 
 void OnCollisionEnter2D (Collision2D col){
 Debug.Log(col.gameObject.name);
+
+//0 vidas
+if(GameManager.vidas<=0)
+{
+GameManager.estoyMuerto=true;
 }
 
+}
+
+
+
+
+public void Respawnear(){
+
+    Debug.Log("vidas:"+GameManager.vidas);
+    GameManager.vidas=GameManager.vidas-1;
+    Debug.Log("vidas:"+GameManager.vidas);
+    transform.position = respawn.transform.position;
+}
 
 }
 
