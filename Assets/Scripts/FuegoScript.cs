@@ -7,7 +7,7 @@ public class FuegoScript : MonoBehaviour
     bool bolaDerecha;
     GameObject personaje;
 
-    float tiempoDestruccion=5,0f;
+    float tiempoDestruccion=5,0f; 
 
     float queHoraEs;
 
