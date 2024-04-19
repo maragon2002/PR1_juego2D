@@ -9,6 +9,8 @@ public class MovPersonaje : MonoBehaviour
     public float multiplicadorVelocidad = 5;
     public float multiplicadorSalto=5;
     bool puedoSaltar=true;
+    public bool mirandoDerecha=true;
+    
     
     Rigidbody2D rb;
 
@@ -44,13 +46,13 @@ public class MovPersonaje : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.A)){
             sr.flipX=true;
             animatorController.SetBool("activacamina",true);
-        
+           mirandoDerecha=false;
         }
         //flip personaje derecha
         if(Input.GetKeyDown(KeyCode.D)){
             sr.flipX=false;
             animatorController.SetBool("activacamina",true);
-        
+            mirandoDerecha=true;
         }
         if(Input.GetKeyUp(KeyCode.A)||Input.GetKeyUp(KeyCode.D)){
             animatorController.SetBool("activacamina",false);
