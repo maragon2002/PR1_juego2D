@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static int vidas=3;
     public static int puntos=0;
+
+    public static int muertes=0;
     public static bool estoyMuerto=false;
 
     // Start is called before the first frame update
@@ -19,5 +21,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Debug.Log ("puntos;"+puntos);
+        Debug.Log("deads;"+muertes);
     }
 }
